@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fa.mapper.ProductMapper">
+    <resultMap id="BaseMap" type="com.fa.entity.Product">
+        <id column="p_id" property="pId"></id>
+        <result column="p_title" property="pTitle"></result>
+        <result column="p_content" property="pContent"></result>
+        <result column="p_img" property="pImg"></result>
+        <result column="p_price" property="pPrice"></result>
+        <result column="p_is_delete" property="pIsDelete"></result>
+        <result column="c_id" property="cId"></result>
+    </resultMap>
+    <select id="selectListByCId" resultType="com.fa.entity.Cate">
+        select p_id,p_title,p_content,p_img,p_price,p_is_delete,c_id
+        from product
+        where c_id = #{cId} and p_is_delete = 1;
+    </select>
+    <insert id="insert">
+        insert into product (p_title, p_content, p_img, p_price, c_id)
+        values (#{product.pTitle},#{product.pContent},#{product.pImg},#{product.pPrice},#{product.cId})
+    </insert>
+</mapper>
